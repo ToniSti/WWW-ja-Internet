@@ -3,7 +3,8 @@
   <head> 
     <title>WWW-ja-Internet</title>
 	<link href="CSS/style.css" rel="stylesheet" type="text/css">
-	<script>
+	<script type="application/javascript" language="javascript">
+	
 		function validateForm()
 		{
 			if(document.forms["myForm"]["uname"].value==null || document.forms["myForm"]["uname"].value=="")
@@ -21,123 +22,201 @@
 		}
 		
 		var x = document.getElementById("demo");
-		function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+		function getLocation() 
+		{
+			if (navigator.geolocation) 
+			{
+				navigator.geolocation.getCurrentPosition(showPosition, showError);
+			} 
+			else 
+			{ 
+				x.innerHTML = "Geolocation is not supported by this browser.";
+			}
+		}
 	
-	function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            x.innerHTML = "User denied the request for Geolocation."
-            break;
-        case error.POSITION_UNAVAILABLE:
-            x.innerHTML = "Location information is unavailable."
-            break;
-        case error.TIMEOUT:
-            x.innerHTML = "The request to get user location timed out."
-            break;
-        case error.UNKNOWN_ERROR:
-            x.innerHTML = "An unknown error occurred."
-            break;
-    }
-}
-}
+		function showError(error) 
+		{
+			switch(error.code) {
+				case error.PERMISSION_DENIED:
+					x.innerHTML = "User denied the request for Geolocation."
+					break;
+				case error.POSITION_UNAVAILABLE:
+					x.innerHTML = "Location information is unavailable."
+					break;
+				case error.TIMEOUT:
+					x.innerHTML = "The request to get user location timed out."
+					break;
+				case error.UNKNOWN_ERROR:
+					x.innerHTML = "An unknown error occurred."
+					break;
+			}
+		}
 
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude;
-}
+		function showPosition(position) 
+		{
+			alert("Latitude: " + position.coords.latitude + "\nLongitude: " + position.coords.longitude);
+		}
+		
+		function allowDrop(ev) 
+		{
+			ev.preventDefault();
+		}
+
+		function drag(ev) 
+		{
+			ev.dataTransfer.setData("text", ev.target.id);
+		}
+
+		function drop(ev) 
+		{
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			ev.target.appendChild(document.getElementById(data));
+		}
 	</script>
+	<meta name="description" content="Webpage for KAMK WWW ja Internet course. My favorite video games">
+	<meta name="keywords" content="WWW, Internet, KAMK, Favorite, Video, Games">
   </head>
 
-  <body bgcolor="#aaaaaa">
-	<div id="body">					
-		<div id="topbar">
-			<div id="banner">
-			</div>
-
-			<ul id="topnav">
+  <body bgcolor="#708090">
+	<div id="banner"></div>
+	<div class="sticky">
+		<ul id="topnav">
 				<li><a href="#">Home</a></li>
-				<li><a href="#create">Create HTML5</a></li>
-				<li><a href="#">Products</a></li>
-				<li><a href="#contactus">Contact Us</a></li>
-			</ul>
-		</div>
-		
-		<div id="sidebar">
-			<ul id="sidenav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a onclick="changecolor()">Change BG</a></span></li>
-				<li><a href="#create">Create HTML5</a></li>
-				<li><a href="#">Products</a></li>
-				<li><a href="#contactus">Contact Us</a></li>
-			</ul>
-		</div>	
-		
+				<li><a href="#table">Table</a></li>
+				<li><a href="#form">Form</a></li>
+				<li><a href="#video">Video</a></li>
+				<li><a href="#location">Location</a></li>
+				<li><a href="#dnd">Drag & Drop</a></li>
+		</ul>
+	</div>
+	
+	<div id="content" style="margin-bottom:-40px">						
 		<div id="mainbox">
-			<h2 id="create">Create HTML5</h2>
-			<p>Clicking the 'Create HTML5-button' should bring you here.</p>
-			<a href="http://www.kamk.fi/fi" target="_blank">
-				<img src="http://www.kamk.fi/layouts/KAMK_2018/images/kamk-logo.png" alt="KAMK Logo">
-			</a>
+			<div>
+				<h2 style="font-size:24px">WELCOME TO MY WWW PAGE!</h2>		
+				<p>Here you'll find a list of my favorite games and some other things.
+				<br><br>This webpage was made for KAMK's "WWW ja Internet" Course.</p>
+				<a href="http://www.kamk.fi/fi" target="_blank">
+					<img src="Images/kamk-logo.png" alt="KAMK Logo" width="128">
+				</a> 
+			</div>
 			
-			<p>Click the button to get your coordinates.</p>
-
-			<button onclick="getLocation()">Get your location</button>
+			<div>
+				<a class="anchor" id="table"></a>
+				<h2>Favorite Games</h2>
+				<p>Here's some of my favorite games in no particular order. These are not all 10/10
+				games, but they all have something I really enjoy about them, e.g. combat system.
+				<table id="games">
+					<tr>
+						<td class="games">Name:</td>
+						<td>Genre:</td>
+						<td>Released:</td>
+					</tr>
+					<tr>
+						<td>Devil May Cry 3</td>
+						<td>Action</td>
+						<td>2005</td>
+					</tr>
+					<tr>
+						<td>Devil May Cry 4: Special Edition</td>
+						<td>Action</td>
+						<td>2015</td>
+					</tr>
+					<tr>
+						<td>Final Fantasy XII</td>
+						<td>RPG</td>
+						<td>2006</td>
+					</tr>
+					<tr>
+						<td>The Legend of Zelda: Majora's Mask</td>
+						<td>Action</td>
+						<td>2000</td>
+					</tr>
+				</table>
+			</div>
 			
-			<p id="demo"></p>
-
-			<h2 id="contactus">Contact Us</h2>
-			<p>Clicking the 'Contact Us' should bring you here.</p>
-			<form name="myForm" onsubmit="return validateForm()">			
+			<div>
+				<a class="anchor" id="form"></a>
+				<h2>Favorite Game Survey</h2>
+				<p>What's your favorite game? You can use this to enter information about your favorite video game, its genre and why you like it.</p>
+				<form name="myForm" onsubmit="return validateForm()">			
+					<table>
+						<tr>
+							<td>Favorite Game*:</td>
+							<td>User Name*:</td>							
+						</tr>
+						<tr>
+							<td><input type="text" name="gname"></td>
+							<td><input type="text" name="uname"></td>					
+						</tr>
+						<tr>
+							<td>
+								Game Genre:<br> 
+								<select name="genre">
+								<option>None</option>
+								<option>Action</option>
+								<option>RPG</option>
+								<option>Shooter</option>
+								<option>Puzzle</option>
+								<option>Other</option>
+								</select><br><br>
+								Please, fill this if you chose 'other':<br>
+								<input type="text" name="uname">					
+							</td>
+							<td>
+								Gender:<br>
+								<input type="radio" name="gender" value="male" checked="checked">Male<br>
+								<input type="radio" name="gender" value="female">Female<br>
+								<input type="radio" name="gender" value="other">Other<br>
+								<input type="radio" name="gender" value="other">No answer<br>
+							</td>
+						</tr>
+					</table><br>			
+					
+					Comment:<br><textarea rows="10" cols="80"></textarea><br>
+					<input type="submit" value="Submit">
+					<input type="reset"><br><br>
+					<sub>Boxes marked with * must be filled out. <br> This information is not stored or sent anywhere!</sub>
+				</form>
+			</div>
+			
+			<div>
+				<a class="anchor" id="video"></a>
+				<h2>Video:</h2>
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/-xYhy8HTXP4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+			
+			<div>
+				<a class="anchor" id="location"></a>
+				<h2>Location</h2>
+				<p>Get your latitude and longitude by clicking the button.</p>
+				<button onclick="getLocation()">Click me!</button>			
+				<p id="demo"></p>
+			</div>		
+			
+			<div>
+				<a class="anchor" id="dnd"></a>				
+				<h2>Drag & Drop:</h2>
+				<p>Drag and drop this grumpy stickman from one box to the other and back again and maybe he'll be happy someday. 
 				<table>
 					<tr>
-						<td>User Name*:</td>
-						<td>Favorite Game*:</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="uname"></td>
-						<td><input type="text" name="gname"></td>
-					</tr>
-					<tr>
 						<td>
-							Gender:<br>
-							<input type="radio" name="gender" value="male" checked="checked">Male<br>
-							<input type="radio" name="gender" value="female">Female<br>
-							<input type="radio" name="gender" value="other">Other<br>
-							<input type="radio" name="gender" value="other">No answer<br>
+							<div id="canvas" ondrop="drop(event)" ondragover="allowDrop(event)">		
+							<img src="Images/DragMe.png" alt="DragMe" draggable="true" ondragstart="drag(event)" id="drag1" width="256" height="256"></div>
 						</td>
 						<td>
-							Favorite Genre:<br> 
-							<select name="genre">
-							<option>None</option>
-							<option>Action</option>
-							<option>RPG</option>
-							<option>Shooter</option>
-							<option>Puzzle</option>
-							<option>Other</option>
-							</select><br><br>
-							Please, fill this if you chose 'other':<br>
-							<input type="text" name="uname">
+							<div id="canvas2" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 						</td>
 					</tr>
-				</table><br>			
-				
-				Comment:<br><textarea rows="10" cols="80"></textarea><br>
-				<input type="submit" value="Submit">
-				<input type="reset"><br><br>
-				<sub>Boxes marked with * must be filled out.</sub>
-			</form>
-			
-			<h2>Video:</h2>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-xYhy8HTXP4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>		</div>
+				</table>
+			</div>
+		</div>	
 		
 		<div id="footer">
-			<p>FOOTER</p>
+		<p>Page by Toni Stigell - 2018</p>
 		</div>
+		
 	</div>
   </body>
 </html>
